@@ -5,7 +5,23 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { BUTTON_TYPES, SIZES, VARIANTS } from "./utils/types";
+export { BUTTON_TYPES, SIZES, VARIANTS } from "./utils/types";
 export namespace Components {
+    interface JhAlert {
+        "dismissible"?: boolean;
+        "variant"?: VARIANTS;
+    }
+    interface JhButton {
+        "disabled": boolean;
+        "href"?: string;
+        "label"?: string;
+        "outline"?: boolean;
+        "size"?: SIZES;
+        "tagElement": string;
+        "type"?: BUTTON_TYPES;
+        "variant"?: VARIANTS;
+    }
     interface MyComponent {
         /**
           * The first name
@@ -21,7 +37,49 @@ export namespace Components {
         "middle": string;
     }
 }
+export interface JhAlertCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLJhAlertElement;
+}
+export interface JhButtonCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLJhButtonElement;
+}
 declare global {
+    interface HTMLJhAlertElementEventMap {
+        "close": any;
+    }
+    interface HTMLJhAlertElement extends Components.JhAlert, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLJhAlertElementEventMap>(type: K, listener: (this: HTMLJhAlertElement, ev: JhAlertCustomEvent<HTMLJhAlertElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLJhAlertElementEventMap>(type: K, listener: (this: HTMLJhAlertElement, ev: JhAlertCustomEvent<HTMLJhAlertElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLJhAlertElement: {
+        prototype: HTMLJhAlertElement;
+        new (): HTMLJhAlertElement;
+    };
+    interface HTMLJhButtonElementEventMap {
+        "jhClick": any;
+    }
+    interface HTMLJhButtonElement extends Components.JhButton, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLJhButtonElementEventMap>(type: K, listener: (this: HTMLJhButtonElement, ev: JhButtonCustomEvent<HTMLJhButtonElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLJhButtonElementEventMap>(type: K, listener: (this: HTMLJhButtonElement, ev: JhButtonCustomEvent<HTMLJhButtonElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLJhButtonElement: {
+        prototype: HTMLJhButtonElement;
+        new (): HTMLJhButtonElement;
+    };
     interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
     }
     var HTMLMyComponentElement: {
@@ -29,10 +87,28 @@ declare global {
         new (): HTMLMyComponentElement;
     };
     interface HTMLElementTagNameMap {
+        "jh-alert": HTMLJhAlertElement;
+        "jh-button": HTMLJhButtonElement;
         "my-component": HTMLMyComponentElement;
     }
 }
 declare namespace LocalJSX {
+    interface JhAlert {
+        "dismissible"?: boolean;
+        "onClose"?: (event: JhAlertCustomEvent<any>) => void;
+        "variant"?: VARIANTS;
+    }
+    interface JhButton {
+        "disabled"?: boolean;
+        "href"?: string;
+        "label"?: string;
+        "onJhClick"?: (event: JhButtonCustomEvent<any>) => void;
+        "outline"?: boolean;
+        "size"?: SIZES;
+        "tagElement"?: string;
+        "type"?: BUTTON_TYPES;
+        "variant"?: VARIANTS;
+    }
     interface MyComponent {
         /**
           * The first name
@@ -48,6 +124,8 @@ declare namespace LocalJSX {
         "middle"?: string;
     }
     interface IntrinsicElements {
+        "jh-alert": JhAlert;
+        "jh-button": JhButton;
         "my-component": MyComponent;
     }
 }
@@ -55,6 +133,8 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "jh-alert": LocalJSX.JhAlert & JSXBase.HTMLAttributes<HTMLJhAlertElement>;
+            "jh-button": LocalJSX.JhButton & JSXBase.HTMLAttributes<HTMLJhButtonElement>;
             "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
         }
     }
