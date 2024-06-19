@@ -16,6 +16,7 @@ export class JhButton {
   @Prop() outline?: boolean;
   @Prop() size?: SIZES;
   @Prop() href?: string;
+  @Prop() btnClasses?: string;
   @Event() jhClick?: EventEmitter;
   render() {
     const TagElement = this.tagElement;
@@ -28,7 +29,8 @@ export class JhButton {
             [`btn-${this.variant}`]: this.variant && !this.outline,
             [`btn-outline-${this.variant}`]: this.variant && this.outline,
             [`btn-${this.size}`]: this.size,
-          }
+          },
+          this.btnClasses,
         ])}
         disabled={this.disabled}
         onClick={(ev) => this.jhClick.emit(ev)}

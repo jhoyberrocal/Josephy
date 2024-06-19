@@ -24,7 +24,7 @@ export class JhAlert {
   render() {
     const DismissibleButton = () => {
       if (this.dismissible) {
-        return (<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>)
+        return (<button type="button" class="btn-close" aria-label="Close"></button>)
       }
     }
     return (

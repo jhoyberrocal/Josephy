@@ -12,7 +12,13 @@ export namespace Components {
         "dismissible"?: boolean;
         "variant"?: VARIANTS;
     }
+    interface JhBadge {
+        "pill"?: boolean;
+        "position"?: string;
+        "variant"?: VARIANTS;
+    }
     interface JhButton {
+        "btnClasses"?: string;
         "disabled": boolean;
         "href"?: string;
         "label"?: string;
@@ -63,6 +69,12 @@ declare global {
         prototype: HTMLJhAlertElement;
         new (): HTMLJhAlertElement;
     };
+    interface HTMLJhBadgeElement extends Components.JhBadge, HTMLStencilElement {
+    }
+    var HTMLJhBadgeElement: {
+        prototype: HTMLJhBadgeElement;
+        new (): HTMLJhBadgeElement;
+    };
     interface HTMLJhButtonElementEventMap {
         "jhClick": any;
     }
@@ -88,6 +100,7 @@ declare global {
     };
     interface HTMLElementTagNameMap {
         "jh-alert": HTMLJhAlertElement;
+        "jh-badge": HTMLJhBadgeElement;
         "jh-button": HTMLJhButtonElement;
         "my-component": HTMLMyComponentElement;
     }
@@ -98,7 +111,13 @@ declare namespace LocalJSX {
         "onClose"?: (event: JhAlertCustomEvent<any>) => void;
         "variant"?: VARIANTS;
     }
+    interface JhBadge {
+        "pill"?: boolean;
+        "position"?: string;
+        "variant"?: VARIANTS;
+    }
     interface JhButton {
+        "btnClasses"?: string;
         "disabled"?: boolean;
         "href"?: string;
         "label"?: string;
@@ -125,6 +144,7 @@ declare namespace LocalJSX {
     }
     interface IntrinsicElements {
         "jh-alert": JhAlert;
+        "jh-badge": JhBadge;
         "jh-button": JhButton;
         "my-component": MyComponent;
     }
@@ -134,6 +154,7 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "jh-alert": LocalJSX.JhAlert & JSXBase.HTMLAttributes<HTMLJhAlertElement>;
+            "jh-badge": LocalJSX.JhBadge & JSXBase.HTMLAttributes<HTMLJhBadgeElement>;
             "jh-button": LocalJSX.JhButton & JSXBase.HTMLAttributes<HTMLJhButtonElement>;
             "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
         }
