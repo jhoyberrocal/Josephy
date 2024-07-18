@@ -28,6 +28,17 @@ export namespace Components {
         "type"?: BUTTON_TYPES;
         "variant"?: VARIANTS;
     }
+    interface JhList {
+        "classNames"?: string;
+        "flush"?: boolean;
+        "numbered"?: boolean;
+    }
+    interface JhListItem {
+        "actionable"?: boolean;
+        "active"?: boolean;
+        "disabled"?: boolean;
+        "variant"?: VARIANTS;
+    }
     interface MyComponent {
         /**
           * The first name
@@ -92,6 +103,18 @@ declare global {
         prototype: HTMLJhButtonElement;
         new (): HTMLJhButtonElement;
     };
+    interface HTMLJhListElement extends Components.JhList, HTMLStencilElement {
+    }
+    var HTMLJhListElement: {
+        prototype: HTMLJhListElement;
+        new (): HTMLJhListElement;
+    };
+    interface HTMLJhListItemElement extends Components.JhListItem, HTMLStencilElement {
+    }
+    var HTMLJhListItemElement: {
+        prototype: HTMLJhListItemElement;
+        new (): HTMLJhListItemElement;
+    };
     interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
     }
     var HTMLMyComponentElement: {
@@ -102,6 +125,8 @@ declare global {
         "jh-alert": HTMLJhAlertElement;
         "jh-badge": HTMLJhBadgeElement;
         "jh-button": HTMLJhButtonElement;
+        "jh-list": HTMLJhListElement;
+        "jh-list-item": HTMLJhListItemElement;
         "my-component": HTMLMyComponentElement;
     }
 }
@@ -128,6 +153,17 @@ declare namespace LocalJSX {
         "type"?: BUTTON_TYPES;
         "variant"?: VARIANTS;
     }
+    interface JhList {
+        "classNames"?: string;
+        "flush"?: boolean;
+        "numbered"?: boolean;
+    }
+    interface JhListItem {
+        "actionable"?: boolean;
+        "active"?: boolean;
+        "disabled"?: boolean;
+        "variant"?: VARIANTS;
+    }
     interface MyComponent {
         /**
           * The first name
@@ -146,6 +182,8 @@ declare namespace LocalJSX {
         "jh-alert": JhAlert;
         "jh-badge": JhBadge;
         "jh-button": JhButton;
+        "jh-list": JhList;
+        "jh-list-item": JhListItem;
         "my-component": MyComponent;
     }
 }
@@ -156,6 +194,8 @@ declare module "@stencil/core" {
             "jh-alert": LocalJSX.JhAlert & JSXBase.HTMLAttributes<HTMLJhAlertElement>;
             "jh-badge": LocalJSX.JhBadge & JSXBase.HTMLAttributes<HTMLJhBadgeElement>;
             "jh-button": LocalJSX.JhButton & JSXBase.HTMLAttributes<HTMLJhButtonElement>;
+            "jh-list": LocalJSX.JhList & JSXBase.HTMLAttributes<HTMLJhListElement>;
+            "jh-list-item": LocalJSX.JhListItem & JSXBase.HTMLAttributes<HTMLJhListItemElement>;
             "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
         }
     }
